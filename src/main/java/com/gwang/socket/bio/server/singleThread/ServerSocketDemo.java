@@ -1,4 +1,4 @@
-package com.gwang.socket.bio.singleThread;
+package com.gwang.socket.bio.server.singleThread;
 
 import java.io.BufferedReader;
 import java.io.IOException;

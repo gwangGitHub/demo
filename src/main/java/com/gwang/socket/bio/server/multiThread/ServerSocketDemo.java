@@ -1,4 +1,4 @@
-package com.gwang.socket.bio.multiThread;
+package com.gwang.socket.bio.server.multiThread;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -7,7 +7,7 @@ import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gwang.socket.bio.handler.SocketHandler;
+import com.gwang.socket.bio.server.handler.SocketHandler;
 
 /**
  * 多线程的服务器端

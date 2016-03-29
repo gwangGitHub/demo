@@ -1,4 +1,4 @@
-package com.gwang.socket.bio.threadPool;
+package com.gwang.socket.bio.server.threadPool;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gwang.socket.bio.handler.SocketHandler;
+import com.gwang.socket.bio.server.handler.SocketHandler;
 
 /**
  * 线程池的服务器端
