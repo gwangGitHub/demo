@@ -6,6 +6,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.session.HashSessionIdManager;
+import org.eclipse.jetty.server.session.HashSessionManager;
+import org.eclipse.jetty.server.session.SessionHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
@@ -70,7 +73,18 @@ public class JettyDemo {
         log.info("Start http server at {}, context path is {}", port, contextPath);
         try {
             Server server = new Server(port);
-            server.setHandler(getServletContextHandler());
+            ServletContextHandler context = getServletContextHandler();
+            
+            // Specify the Session ID Manager
+            HashSessionIdManager idmanager = new HashSessionIdManager();
+            server.setSessionIdManager(idmanager);
+            
+            // Create the SessionHandler (wrapper) to handle the sessions
+            HashSessionManager manager = new HashSessionManager();
+            SessionHandler sessions = new SessionHandler(manager);
+            
+            context.setHandler(sessions);
+            server.setHandler(context);
             server.start();
             isJettyRunning.set(true);
             server.join();
