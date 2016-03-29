@@ -17,10 +17,16 @@ import org.slf4j.LoggerFactory;
  */
 public class ServerSocketDemo {
     private static final Logger log = LoggerFactory.getLogger(ServerSocketDemo.class);
+    
+    private int port;
 	
 	final static String RESPONSE = "HTTP/1.0 200 OK\r\n Content-type: text/plain\r\n\r\nHello World\r\n";
 
 	public ServerSocketDemo(int port) {
+		this.port = port;
+	}
+	
+	public void start () {
 		this.init(port);
 	}
 
@@ -29,12 +35,14 @@ public class ServerSocketDemo {
 	 * 
 	 * @param port
 	 */
-	public void init(int port) {
+	private void init(int port) {
 		try {
 			ServerSocket listener = new ServerSocket(port);
+			log.info("server start......");
 			try {
 				while (true) {
 					Socket socket = listener.accept();
+					log.info("socket accept...... address:{}", socket.getLocalAddress());
 					try {
 						handleRequest(socket);
 					} catch (IOException e) {
@@ -49,15 +57,22 @@ public class ServerSocketDemo {
 		}
 	}
 
-	public static void handleRequest(Socket socket) throws IOException {
+	private void handleRequest(Socket socket) throws IOException {
 		// Read the input stream, and return “200 OK”
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			log.info(in.readLine());
-			OutputStream out = socket.getOutputStream();
-			out.write(RESPONSE.getBytes(StandardCharsets.UTF_8));
+			while (true) {
+				log.info(in.readLine());
+				OutputStream out = socket.getOutputStream();
+				out.write(RESPONSE.getBytes(StandardCharsets.UTF_8));
+			}
 		} finally {
 			socket.close();
 		}
+	}
+	
+	public static void main(String[] args) {
+		ServerSocketDemo demo = new ServerSocketDemo(9211);
+		demo.start();
 	}
 }
