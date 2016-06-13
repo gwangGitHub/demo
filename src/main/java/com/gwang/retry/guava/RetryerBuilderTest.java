@@ -88,32 +88,6 @@ public class RetryerBuilderTest {
             }
         };
     }
-    
-    public abstract class aa implements Callable<Boolean> {
-
-		public Boolean call() throws Exception {
-			return null;
-		}
-    	
-		public void test () {
-			
-		}
-		
-		public abstract void test1 ();
-    }
-    
-    public class bb extends aa {
-    	
-    	@Override
-    	public void test () {
-			
-		}
-
-		@Override
-		public void test1() {
-			
-		}
-    }
 
     @Test
     public void testWithStopStrategy() throws ExecutionException {
