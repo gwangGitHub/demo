@@ -5,9 +5,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import com.gwang.rmi.iface.RMIInterface;
+import com.gwang.rmi.service.iface.RMIInterface;
+import com.gwang.rmi.service.impl.RMIInterfaceImpl;
 
-public class RMIServerDemo implements RMIInterface {
+public class RMIServerDemo {
 	private int port;
 	private String serverName;
 	
@@ -16,27 +17,19 @@ public class RMIServerDemo implements RMIInterface {
 		this.serverName = serverName;
 	}
 	
-	public String echo(String msg) throws RemoteException {
-		if ("quit".equalsIgnoreCase(msg)) {
-			System.out.println("Server will be shutdown");
-			System.exit(0);
-		}
-		System.out.println("message from client:" + msg);
-		return "Server response:" + msg;
-	}
-	
 	public void startServer() {
 		try {
-			UnicastRemoteObject.exportObject(this, port);
+			RMIInterface serviceDemo = new RMIInterfaceImpl();
+			UnicastRemoteObject.exportObject(serviceDemo, 9527);
 			Registry registry = LocateRegistry.createRegistry(port);
-			registry.rebind(serverName, this);
+			registry.rebind(serverName, serviceDemo);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public static void main(String[] args) {
-		RMIServerDemo server = new RMIServerDemo(8080, "RMIServerDemo");
+		RMIServerDemo server = new RMIServerDemo(1099, "RMIServerDemo");
 		server.startServer();
 	}
 }

@@ -3,7 +3,7 @@ package com.gwang.rmi.client;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import com.gwang.rmi.iface.RMIInterface;
+import com.gwang.rmi.service.iface.RMIInterface;
 
 public class RMIClientDemo {
 
