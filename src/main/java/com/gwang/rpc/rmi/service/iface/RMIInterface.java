@@ -1,4 +1,4 @@
-package com.gwang.rmi.service.iface;
+package com.gwang.rpc.rmi.service.iface;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

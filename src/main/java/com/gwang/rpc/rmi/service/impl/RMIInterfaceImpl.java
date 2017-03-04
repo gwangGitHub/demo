@@ -1,8 +1,8 @@
-package com.gwang.rmi.service.impl;
+package com.gwang.rpc.rmi.service.impl;
 
 import java.rmi.RemoteException;
 
-import com.gwang.rmi.service.iface.RMIInterface;
+import com.gwang.rpc.rmi.service.iface.RMIInterface;
 
 public class RMIInterfaceImpl implements RMIInterface {
 

@@ -1,12 +1,12 @@
-package com.gwang.rmi.server;
+package com.gwang.rpc.rmi.server;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import com.gwang.rmi.service.iface.RMIInterface;
-import com.gwang.rmi.service.impl.RMIInterfaceImpl;
+import com.gwang.rpc.rmi.service.iface.RMIInterface;
+import com.gwang.rpc.rmi.service.impl.RMIInterfaceImpl;
 
 public class RMIServerDemo {
 	private int port;
