@@ -26,7 +26,7 @@ public class SocketChannelDemo {
             // 设置为非阻塞方式  
             socketChannel.configureBlocking(false);  
 	        // 注册连接服务端socket动作  
-	        socketChannel.register(selector, SelectionKey.OP_CONNECT);  
+	        socketChannel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_READ);  
 	        // 连接  
 	        socketChannel.connect(new InetSocketAddress(host, port));  
     	} catch (Exception e) {

@@ -2,12 +2,18 @@ package com.gwang.socket.nio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.spi.SelectorProvider;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ServerSocketChannelDemo {
+	private static final Logger log = LoggerFactory.getLogger(ServerSocketChannelDemo.class);
+	
 	private Selector selector; //选择器
 	private SelectorHandler handler;
 
@@ -29,9 +35,11 @@ public class ServerSocketChannelDemo {
 			//告诉程序现在不是阻塞方式的     
             serverSocketChannel.configureBlocking(false);  
             //获取现在与该通道关联的套接字  
-			serverSocketChannel.socket().bind(new InetSocketAddress(port));
+            ServerSocket serverSocket = serverSocketChannel.socket();
+            InetSocketAddress address = new InetSocketAddress(port);
+            serverSocket.bind(address);
 			serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-			System.out.println("Server Start----port:" + port);  
+			log.info("Server Start----port:" + port);  
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -39,6 +47,10 @@ public class ServerSocketChannelDemo {
 	
 	public void listen () {
 		handler.listen();
+	}
+	
+	public void stop () {
+		handler.stop();
 	}
 	
     public static void main(String[] args) throws IOException {  
