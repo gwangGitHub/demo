@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="businessService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl">
+            <!-- "BusinessService"为service.xml里指定的serviceName，1199为registryPort指定 -->
+            <value>rmi://localhost:1199/BusinessService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.gwang.rpc.springrmi.Business</value>
+        </property>
+    </bean>
+</beans>  

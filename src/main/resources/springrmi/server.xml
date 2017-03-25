@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="businessService" class="com.gwang.rpc.springrmi.BusinessImpl" />
+    <bean id="serviceExporter" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName">
+            <value>BusinessService</value>
+        </property>
+        <property name="service">
+            <ref bean="businessService" />
+        </property>
+        <property name="serviceInterface">
+            <value>com.gwang.rpc.springrmi.Business</value>
+        </property>
+        <property name="registryPort">
+            <value>1199</value>
+        </property>
+    </bean>
+</beans>  
