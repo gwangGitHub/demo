@@ -13,13 +13,13 @@
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>1.10.19</version>
-            <scope>test</scope>
-        </dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- mysql connector -->
 		<dependency>
@@ -77,7 +77,7 @@
 			<artifactId>guava-retrying</artifactId>
 			<version>2.0.0</version>
 		</dependency>
-		
+
 		<!-- apache commons utils -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -104,13 +104,32 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
 		</dependency>
-		
+
 		<!-- cglib -->
 		<dependency>
 		    <groupId>cglib</groupId>
 		    <artifactId>cglib</artifactId>
 		    <version>3.2.4</version>
-		</dependency>	
-		
+		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.2.4</version>
+		</dependency>
+
+		<!-- thrift -->
+		<dependency>
+			<groupId>org.apache.thrift</groupId>
+			<artifactId>libthrift</artifactId>
+			<version>0.8.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+		</dependency>
+
 	</dependencies>
 </project>
