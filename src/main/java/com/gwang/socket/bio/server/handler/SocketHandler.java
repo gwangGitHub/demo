@@ -3,10 +3,10 @@ package com.gwang.socket.bio.server.handler;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,25 +20,45 @@ public class SocketHandler implements Runnable {
 		this.socket = socket;
 	}
 
+	@Override
     public void run() {
 		try {
 			handleRequest(socket);
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 	}
 
 	private void handleRequest(Socket socket) throws IOException {
 		// Read the input stream, and return “200 OK”
+		BufferedReader in = null;
+		PrintWriter out = null;
 		try {
-			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			out = new PrintWriter(socket.getOutputStream(), true);
+			String body = null;
 			while (true) {
-				log.info(in.readLine());
-				OutputStream out = socket.getOutputStream();
-				out.write(RESPONSE.getBytes(StandardCharsets.UTF_8));
+				body = in.readLine();
+				if (StringUtils.isBlank(body)) {
+					//读取到""空字符串或是null标示读取内容完毕
+					break;
+				}
+				log.info(body);
 			}
+			out.println(RESPONSE);
 		} finally {
-			socket.close();
+			if (in != null) {
+				in.close();
+				in = null;
+			}
+			if (out != null) {
+				out.close();
+				out = null;
+			}
+			if (socket != null) {
+				socket.close();
+				socket = null;
+			}
 		}
 	}
 }

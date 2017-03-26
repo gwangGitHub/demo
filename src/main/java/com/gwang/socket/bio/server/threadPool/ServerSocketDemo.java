@@ -23,8 +23,8 @@ public class ServerSocketDemo {
 	
 	private int port;
 	
-	ExecutorService executor = Executors.newFixedThreadPool(4);
-//	ExecutorService executor = newBoundedFixedThreadPool(4, 16);
+//	ExecutorService executor = Executors.newFixedThreadPool(4);
+	ExecutorService executor = newBoundedFixedThreadPool(4, 16);
 	
 	public static ExecutorService newBoundedFixedThreadPool(int nThreads, int capacity) {
 		return new ThreadPoolExecutor(nThreads, nThreads, 0L,
@@ -53,14 +53,17 @@ public class ServerSocketDemo {
 				while (true) {
 					Socket socket = listener.accept();
 					log.info("socket accept...... address:{}", socket.getLocalAddress());
-//					executor.execute(new HandleRequestRunnable(socket));
-					executor.submit(new SocketHandler(socket));
+					executor.execute(new SocketHandler(socket));
+//					executor.submit(new SocketHandler(socket));
 				}
 			} finally {
-				listener.close();
+				if (listener != null) {
+					listener.close();
+					log.info("server is closed......");
+				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 	}
 	
