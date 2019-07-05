@@ -1,0 +1,14 @@
+import com.gwang.drools.domain.DistanceRule;
+import com.gwang.drools.domain.DistanceRulePair;
+import com.gwang.drools.domain.FeeContext;
+import java.math.BigDecimal;
+
+rule "Calculate Distance fee"
+
+   when
+       $context : FeeContext();
+       $rule : DistanceRule();
+       $rulePair : DistanceRulePair(startDistance < $context.distance, $context.distance < endDistance) from $rule.rulePairs;//从list中取出每个product
+   then
+       $context.setDistanceFee($rulePair.getMoney());
+end
