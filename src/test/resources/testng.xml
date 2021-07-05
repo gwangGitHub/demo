@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite tests">
+    <test name="Automatic tests">
+        <groups>
+            <run>
+                <!-- 非自动化测试组名，不能自动化运行的测试方法，需要指定该组名，这样在运行套件执行测试时，测试方法就不会运行 -->
+                <exclude name="non-automatic-test"/>
+            </run>
+        </groups>
+        <packages>
+            <!-- 单元测试扫描包路径，取具体项目的最短包路径 + .*，这样就可以覆盖所有单元测试类 -->
+            <package name="com.gwang.*"/>
+        </packages>
+    </test>
+</suite>
