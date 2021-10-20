@@ -9,6 +9,6 @@ public class ThreadDemo implements Runnable {
 	}
 
 	public void run() {
-		sDemo.method21();
+		sDemo.method31();
 	}
 }
