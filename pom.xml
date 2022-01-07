@@ -16,7 +16,7 @@
 		<project-build-sourceEncoding>UTF-8</project-build-sourceEncoding>
 		<testng.version>6.14.3</testng.version>
 		<hamcrest.version>2.2</hamcrest.version>
-		<h2.version>1.4.200</h2.version>
+		<h2.version>2.0.206</h2.version>
 		<database-rider.version>1.21.0</database-rider.version><!-- 详见 https://j.mp/38E9bzH -->
 		<junit.version>4.12</junit.version>
 		<jmockit.version>1.41</jmockit.version>
