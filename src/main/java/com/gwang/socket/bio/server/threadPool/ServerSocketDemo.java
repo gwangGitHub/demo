@@ -9,6 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import com.gwang.socket.bio.server.handler.SocketHttpHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,8 +53,11 @@ public class ServerSocketDemo {
 			try {
 				while (true) {
 					Socket socket = listener.accept();
-					log.info("socket accept...... address:{}", socket.getLocalAddress());
-					executor.execute(new SocketHandler(socket));
+					log.info("socket accept...... address:{},port:{}", socket.getLocalAddress(),socket.getPort());
+//					executor.execute(new SocketHandler(socket));
+					executor.execute(new SocketHttpHandler(socket));
+
+					//Java线程池系列之execute和submit区别 https://blog.csdn.net/happyyear1/article/details/122378013
 //					executor.submit(new SocketHandler(socket));
 				}
 			} finally {
